@@ -18,7 +18,13 @@ class ExpenseItem extends StatelessWidget {
             children: [
               Text("₺ ${expense.price.toStringAsFixed(2)}"),
               const Spacer(),
-              Text(DateFormat.yMd().format(expense.date)),
+              Icon(categoryIcons[expense.category]),
+              const SizedBox(
+                width: 6,
+              ),
+              Text(
+                DateFormat.yMd().format(expense.date),
+              ),
             ],
           )
         ],
