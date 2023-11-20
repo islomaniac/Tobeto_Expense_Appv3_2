@@ -1,4 +1,5 @@
 import 'package:expenseappv3/models/expense.dart';
+import 'package:expenseappv3/widget/expense_item.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesPage extends StatefulWidget {
@@ -54,7 +55,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
             child: ListView.builder(
               itemCount: expenses.length,
               itemBuilder: (context, index) {
-                return Text(expenses[index].name);
+                return ExpenseItem(expenses[index]);
               },
             ),
           ),
