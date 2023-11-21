@@ -1,37 +1,53 @@
+import 'package:expenseappv3/models/expense.dart';
 import 'package:expenseappv3/pages/expenses_page.dart';
 import 'package:expenseappv3/widget/new_expense.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _MainPageState createState() => _MainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
+  List<Expense> expenses = [
+    Expense(name: "Yemek", price: 500.529, date: DateTime.now(), category: Category.food),
+    Expense(name: "Udemy Kursu", price: 200, date: DateTime.now(), category: Category.work),
+  ];
+
+  addExpense(Expense expense) {
+    setState(() {
+      expenses.add(expense);
+    });
+  }
+
+  removeExpense(Expense expense) {
+    setState(() {
+      expenses.remove(expense);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const ExpensesPage(),
       appBar: AppBar(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.black,
         title: const Text("Expense App"),
+        backgroundColor: Colors.deepPurpleAccent,
         actions: [
           IconButton(
               onPressed: () {
                 showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return const NewExpense();
-                  },
-                );
+                    context: context,
+                    builder: (ctx) {
+                      return NewExpense(addExpense);
+                    });
               },
               icon: const Icon(Icons.add))
         ],
       ),
+      body: ExpensesPage(expenses, removeExpense),
     );
   }
 }
