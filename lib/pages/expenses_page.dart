@@ -17,9 +17,12 @@ class _ExpensesPageState extends State<ExpensesPage> {
   Widget build(BuildContext context) {
     return Center(
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const SizedBox(
+        SizedBox(
           height: 150,
-          child: Text("Grafik Bölümü"),
+          child: Text(
+            "Grafik Bölümü",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
         Expanded(
           child: ListView.builder(
