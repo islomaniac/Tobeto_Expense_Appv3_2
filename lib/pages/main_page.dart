@@ -18,6 +18,7 @@ class _MainPageState extends State<MainPage> {
     Expense(name: "Gezi", price: 200, date: DateTime.now(), category: Category.travel),
     Expense(name: "Elektronik", price: 300, date: DateTime.now(), category: Category.travel),
     Expense(name: "Kitap", price: 50, date: DateTime.now(), category: Category.work),
+    Expense(name: "Gıda", price: 150, date: DateTime.now(), category: Category.food),
   ];
 
   List<Expense> insertExpenses = [];
