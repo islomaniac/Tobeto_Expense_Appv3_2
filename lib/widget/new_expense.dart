@@ -17,21 +17,8 @@ class _NewExpenseState extends State<NewExpense> {
   Category _selectedCategory = Category.work;
 
   void _openDatePicker() async {
-    DateTime today = DateTime.now(); // 16.11.2023
-    // 2022, 11, 16
+    DateTime today = DateTime.now();
     DateTime oneYearAgo = DateTime(today.year - 1, today.month, today.day);
-    // showDatePicker(
-    //         context: context,
-    //         initialDate: today,
-    //         firstDate: oneYearAgo,
-    //         lastDate: today)
-    // .then((value) {
-    //   async işlemden cevap ne zaman gelirse bu bloğu çalıştır..
-    //   print(value);
-    // });
-    // async function => await etmek
-    // nullable
-    // 14:20
     DateTime? selectedDate = await showDatePicker(
         context: context,
         initialDate: _selectedDate == null ? today : _selectedDate!,
@@ -64,7 +51,10 @@ class _NewExpenseState extends State<NewExpense> {
                 child: TextField(
                   controller: _expensePriceController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(labelText: "Harcama Miktarı", prefixText: "₺"),
+                  decoration: const InputDecoration(
+                    labelText: "Harcama Miktarı",
+                    prefixText: "₺",
+                  ),
                 ),
               ),
               IconButton(onPressed: () => _openDatePicker(), icon: const Icon(Icons.calendar_month)),

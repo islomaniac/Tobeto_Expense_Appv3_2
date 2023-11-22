@@ -14,7 +14,13 @@ class _MainPageState extends State<MainPage> {
   List<Expense> expenses = [
     Expense(name: "Yemek", price: 500.529, date: DateTime.now(), category: Category.food),
     Expense(name: "Udemy Kursu", price: 200, date: DateTime.now(), category: Category.work),
+    Expense(name: "Kıyafet", price: 200, date: DateTime.now(), category: Category.dress),
+    Expense(name: "Gezi", price: 200, date: DateTime.now(), category: Category.travel),
+    Expense(name: "Elektronik", price: 300, date: DateTime.now(), category: Category.travel),
+    Expense(name: "Kitap", price: 50, date: DateTime.now(), category: Category.work),
   ];
+
+  List<Expense> insertExpenses = [];
 
   addExpense(Expense expense) {
     setState(() {
@@ -24,7 +30,16 @@ class _MainPageState extends State<MainPage> {
 
   removeExpense(Expense expense) {
     setState(() {
+      insertExpenses.add(expense);
       expenses.remove(expense);
+    });
+  }
+
+  insertExpense(Expense expense) {
+    setState(() {
+      if (insertExpenses.isNotEmpty) {
+        addExpense(insertExpenses.last);
+      }
     });
   }
 
@@ -32,9 +47,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // foregroundColor: Colors.white,
         title: const Text("Expense App"),
-        // backgroundColor: Colors.deepPurpleAccent,
         actions: [
           IconButton(
               onPressed: () {
@@ -47,7 +60,7 @@ class _MainPageState extends State<MainPage> {
               icon: const Icon(Icons.add))
         ],
       ),
-      body: ExpensesPage(expenses, removeExpense),
+      body: ExpensesPage(expenses, removeExpense, insertExpense),
     );
   }
 }

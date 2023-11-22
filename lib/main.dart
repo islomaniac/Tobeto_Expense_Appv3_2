@@ -1,30 +1,26 @@
 import 'package:expenseappv3/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
-ColorScheme colorShceme1 = ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent);
+ColorScheme colorScheme1 = ColorScheme.fromSeed(seedColor: Colors.blueGrey);
 
 void main() {
   runApp(
     MaterialApp(
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: colorShceme1,
-        cardTheme: CardTheme(
-          color: colorShceme1.onPrimaryContainer,
-        ),
+        colorScheme: colorScheme1,
         appBarTheme: AppBarTheme(
-          color: colorShceme1.onPrimaryContainer,
-          foregroundColor: colorShceme1.primaryContainer,
+            backgroundColor: colorScheme1.onPrimaryContainer, foregroundColor: colorScheme1.primaryContainer),
+        cardTheme: CardTheme(
+          color: Colors.deepPurpleAccent[100],
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         ),
         textTheme: ThemeData().textTheme.copyWith(
               titleLarge: const TextStyle(fontWeight: FontWeight.bold),
+              bodyMedium: const TextStyle(),
             ),
       ),
-      debugShowCheckedModeBanner: false,
       home: const MainPage(),
     ),
   );
 }
-
-
-//modelleme

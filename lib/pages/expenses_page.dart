@@ -3,9 +3,10 @@ import 'package:expenseappv3/widget/expense_item.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesPage extends StatefulWidget {
-  const ExpensesPage(this.expenses, this.onRemove, {Key? key}) : super(key: key);
+  const ExpensesPage(this.expenses, this.onRemove, this.onInsert, {Key? key}) : super(key: key);
   final List<Expense> expenses;
   final void Function(Expense expense) onRemove;
+  final void Function(Expense expense) onInsert;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -32,18 +33,29 @@ class _ExpensesPageState extends State<ExpensesPage> {
                   key: ValueKey(widget.expenses[index]),
                   child: ExpenseItem(widget.expenses[index]),
                   onDismissed: (direction) {
-                    // if (direction == DismissDirection.startToEnd) {
-                    //   // eğer soldan sağa kaydırılmışsa..
-                    // }
-                    //print(direction);
-                    widget.onRemove(widget.expenses[index]);
+                    Expense removedExpense = widget.expenses[index];
+                    widget.onRemove(removedExpense);
+                    //widget.onRemove(widget.expenses[index]);
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text(
+                          'Harcama Silindi!',
+                          style: TextStyle(fontSize: 17),
+                        ),
+                        action: SnackBarAction(
+                          label: 'Geri Al',
+                          onPressed: () {
+                            setState(() {
+                              widget.onInsert(removedExpense);
+                            });
+                          },
+                        ),
+                      ),
+                    );
                   },
                 );
               }),
-        ),
-        const SizedBox(
-          height: 150,
-          child: Text("Burası bottom bar."),
         )
       ]),
     );
